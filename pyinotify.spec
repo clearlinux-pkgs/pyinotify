@@ -4,7 +4,7 @@
 #
 Name     : pyinotify
 Version  : 0.9.6
-Release  : 7
+Release  : 8
 URL      : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz
 Source0  : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz
 Summary  : Linux filesystem events monitoring
