@@ -6,7 +6,7 @@
 #
 Name     : pyinotify
 Version  : 0.9.6
-Release  : 9
+Release  : 10
 URL      : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz
 Source0  : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz
 Source99 : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz.asc
