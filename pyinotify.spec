@@ -6,9 +6,9 @@
 #
 Name     : pyinotify
 Version  : 0.9.6
-Release  : 10
-URL      : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz
-Source0  : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz
+Release  : 11
+URL      : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz
+Source0  : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz
 Source99 : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz.asc
 Summary  : Linux filesystem events monitoring
 Group    : Development/Tools
@@ -39,20 +39,27 @@ python components for the pyinotify package.
 %setup -q -n pyinotify-0.9.6
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1484564479
+export SOURCE_DATE_EPOCH=1503074480
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1484564479
+export SOURCE_DATE_EPOCH=1503074480
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
+/usr/lib/python3*/*
