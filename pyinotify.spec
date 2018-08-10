@@ -6,19 +6,17 @@
 #
 Name     : pyinotify
 Version  : 0.9.6
-Release  : 12
+Release  : 13
 URL      : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz
 Source0  : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz
-Source99 : https://pypi.python.org/packages/source/p/pyinotify/pyinotify-0.9.6.tar.gz.asc
+Source99 : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz.asc
 Summary  : Linux filesystem events monitoring
 Group    : Development/Tools
 License  : MIT
+Requires: pyinotify-python3
+Requires: pyinotify-license
 Requires: pyinotify-python
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python-dev
-BuildRequires : python3-dev
-BuildRequires : setuptools
+BuildRequires : buildreq-distutils3
 
 %description
 # Pyinotify
@@ -27,12 +25,30 @@ BuildRequires : setuptools
 * Project Wiki     : [http://github.com/seb-m/pyinotify/wiki](http://github.com/seb-m/pyinotify/wiki)
 * API Documentation: [http://seb-m.github.com/pyinotify](http://seb-m.github.com/pyinotify)
 
+%package license
+Summary: license components for the pyinotify package.
+Group: Default
+
+%description license
+license components for the pyinotify package.
+
+
 %package python
 Summary: python components for the pyinotify package.
 Group: Default
+Requires: pyinotify-python3
 
 %description python
 python components for the pyinotify package.
+
+
+%package python3
+Summary: python3 components for the pyinotify package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the pyinotify package.
 
 
 %prep
@@ -43,15 +59,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503074480
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1533931647
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1503074480
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/doc/pyinotify
+cp COPYING %{buildroot}/usr/share/doc/pyinotify/COPYING
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -59,7 +74,13 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/pyinotify/COPYING
+
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python2*/*
+
+%files python3
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
