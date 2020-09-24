@@ -6,7 +6,7 @@
 #
 Name     : pyinotify
 Version  : 0.9.6
-Release  : 19
+Release  : 20
 URL      : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz
 Source0  : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz
 Source1  : http://pypi.debian.net/pyinotify/pyinotify-0.9.6.tar.gz.asc
